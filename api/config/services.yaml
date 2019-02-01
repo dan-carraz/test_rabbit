@@ -31,3 +31,9 @@ services:
             - '@old_sound_rabbit_mq.product_updater_producer'
         tags:
             - { name: doctrine.event_listener, event: postPersist }
+            - { name: doctrine.event_listener, event: postUpdate }
+
+    App\Consumer\ProductReceiverConsumer:
+        arguments:
+            - '@old_sound_rabbit_mq.product_rpc_client_rpc'
+            - '@doctrine.orm.entity_manager'

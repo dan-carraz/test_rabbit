@@ -21,6 +21,16 @@ class ProductListener
 
     public function postPersist(LifecycleEventArgs $eventArgs) : void
     {
+        $this->sendMessage($eventArgs);
+    }
+
+    public function postUpdate (LifecycleEventArgs $eventArgs) : void
+    {
+        $this->sendMessage($eventArgs);
+    }
+
+    private function sendMessage(LifecycleEventArgs $eventArgs) : void
+    {
         $entity = $eventArgs->getEntity();
 
         if (!$entity instanceof Product) {

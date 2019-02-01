@@ -15,13 +15,10 @@ class AbstractProduct
 {
     /**
      * @var string
-     * @ORM\Id
-     * @ORM\Column(type="guid")
-     * @ORM\GeneratedValue(strategy="UUID")
      */
     protected $id;
 
-    /**
+     /**
      * @var string
      * @ORM\Column(type="string", length=20)
      * @Assert\NotBlank()
@@ -41,16 +38,6 @@ class AbstractProduct
     public function getId(): string
     {
         return $this->id;
-    }
-
-    /**
-     * @param string $id
-     * @return AbstractProduct
-     */
-    public function setId(string $id): AbstractProduct
-    {
-        $this->id = $id;
-        return $this;
     }
 
     /**

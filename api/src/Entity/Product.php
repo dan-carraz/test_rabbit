@@ -12,5 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Product extends AbstractProduct
 {
-
+    /**
+     * @var string
+     * @ORM\Id
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="UUID")
+     */
+    protected $id;
 }

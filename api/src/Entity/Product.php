@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ApiResource()
  * @ORM\Entity
  */
-class Product extends AbstractProduct
+final class Product extends AbstractProduct
 {
     /**
      * @var string

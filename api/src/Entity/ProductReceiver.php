@@ -7,10 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  *
- * @ApiResource()
+ * @ApiResource(
+ *    collectionOperations={"get"},
+ *    itemOperations={"get"}
+ * )
  * @ORM\Entity
  */
-class ProductReceiver extends AbstractProduct
+final class ProductReceiver extends AbstractProduct
 {
     /**
      * @var string

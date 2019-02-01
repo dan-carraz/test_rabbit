@@ -52,9 +52,6 @@ class ProductReceiverConsumer implements ConsumerInterface
         //Create new product
         if (! $productReceiver instanceof ProductReceiver) {
             $productReceiver = new ProductReceiver();
-            $metadata = $this->entityManager->getClassMetaData(get_class($productReceiver));
-            $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
-            $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
         }
 
         //Call RPC server to get Product data

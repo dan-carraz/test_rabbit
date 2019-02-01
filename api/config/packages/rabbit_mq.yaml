@@ -1,0 +1,33 @@
+old_sound_rabbit_mq:
+  connections:
+    default:
+      host: 'rabbit1'
+      user:     'rabbitmq'
+      password: 'rabbitmq'
+  producers:
+    product_updater:
+      connection:       default
+      exchange_options: { name: 'product_exchange', type: direct }
+    product_rpc:
+      connection:       default
+      exchange_options: { name: 'product_exchange', type: direct }
+  consumers:
+    product_receiver_consumer:
+      connection:       default
+      exchange_options: { name: 'product_exchange', type: direct }
+      queue_options:
+        name: 'product_q'
+        routing_keys:
+          - 'product'
+      callback: App\Consumer\ProductReceiverConsumer
+  rpc_servers:
+    product_rpc_consumer:
+      exchange_options:
+        name: 'product_exchange'
+        type: direct
+      queue_options:
+        name: 'product_q.rpc'
+        routing_keys:
+          - 'product.rpc'
+      serializer: json_encode
+      callback: App\Consumer\ProductRpcConsumer

@@ -25,3 +25,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Listener\ProductListener:
+        arguments:
+            - '@old_sound_rabbit_mq.product_updater_producer'
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }

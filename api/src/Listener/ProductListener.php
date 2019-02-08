@@ -13,20 +13,43 @@ class ProductListener
      */
     private $productProducer;
 
+    /**
+     * @var array
+     */
+    private $eventsToSendOnPostFlush;
+
     public function __construct(ProducerInterface $productProducer)
     {
 
         $this->productProducer = $productProducer;
+        $this->eventsToSendOnPostFlush = [];
     }
 
+    /**
+     * @param LifecycleEventArgs $eventArgs
+     */
     public function postPersist(LifecycleEventArgs $eventArgs) : void
     {
         $this->sendMessage($eventArgs);
     }
 
+    /**
+     * @param LifecycleEventArgs $eventArgs
+     */
     public function postUpdate (LifecycleEventArgs $eventArgs) : void
     {
-        $this->sendMessage($eventArgs);
+        $this->eventsToSendOnPostFlush[] = $eventArgs;
+    }
+
+    /**
+     * PostFlush event mandatory for rpc to avoid a call before data is commited
+     */
+    public function postFlush()
+    {
+        foreach($this->eventsToSendOnPostFlush as $event) {
+            $this->sendMessage($event);
+        }
+        $this->eventsToSendOnPostFlush = [];
     }
 
     private function sendMessage(LifecycleEventArgs $eventArgs) : void

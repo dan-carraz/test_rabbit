@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "api-platform/api-pack": "^1.1",
+        "eightpoints/guzzle-bundle": "^7.4",
         "guzzlehttp/guzzle": "^6.3",
         "php-amqplib/rabbitmq-bundle": "^1.14",
         "symfony/console": "4.2.*",

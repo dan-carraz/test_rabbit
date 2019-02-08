@@ -37,8 +37,9 @@ class ProductListener
             return;
         }
 
-        $message = ['id' => $entity->getId()];
+        $message = json_encode(['id' => $entity->getId()]);
 
-        $this->productProducer->publish(json_encode($message), 'product');
+        $this->productProducer->publish($message, 'product_with_rpc');
+        $this->productProducer->publish($message, 'product_with_guzzle');
     }
 }

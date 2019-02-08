@@ -6,14 +6,13 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- *
  * @ApiResource(
  *    collectionOperations={"get"},
  *    itemOperations={"get"}
  * )
  * @ORM\Entity
  */
-final class ProductReceiver extends AbstractProduct
+class ProductReceiverGuzzle extends AbstractProduct
 {
     /**
      * @var string

@@ -11,14 +11,23 @@ old_sound_rabbit_mq:
       exchange_options: { name: 'product_exchange', type: direct }
   consumers:
     #Receives message from product_exchange when listener is fired
-    product_receiver_consumer:
+    product_receiver_rpc_consumer:
       connection:       default
       exchange_options: { name: 'product_exchange', type: direct }
       queue_options:
-        name: 'product_q'
+        name: 'product_rpc_q'
         routing_keys:
-          - 'product'
-      callback: App\Consumer\ProductReceiverConsumer
+          - 'product_with_rpc'
+      callback: App\Consumer\ProductReceiverRpcConsumer
+    #Receives message from product_exchange when listener is fired
+    product_receiver_guzzle_consumer:
+      connection:       default
+      exchange_options: { name: 'product_exchange', type: direct }
+      queue_options:
+        name: 'product_guzzle_q'
+        routing_keys:
+          - 'product_with_guzzle'
+      callback: App\Consumer\ProductReceiverGuzzleConsumer
   rpc_servers:
     #RPC server that returns product data
     product_rpc_consumer:
@@ -26,7 +35,7 @@ old_sound_rabbit_mq:
         name: 'product_exchange'
         type: direct
       queue_options:
-        name: 'product_q.rpc'
+        name: 'product_call_rpc_q'
         routing_keys:
           - 'product.rpc'
       callback: App\Consumer\ProductRpcConsumer

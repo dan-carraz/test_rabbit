@@ -33,7 +33,10 @@ services:
             - { name: doctrine.event_listener, event: postPersist }
             - { name: doctrine.event_listener, event: postUpdate }
 
-    App\Consumer\ProductReceiverConsumer:
+    App\Consumer\ProductReceiverRpcConsumer:
         arguments:
             - '@old_sound_rabbit_mq.product_rpc_client_rpc'
-            - '@doctrine.orm.entity_manager'
+
+    App\Consumer\ProductReceiverGuzzleConsumer:
+        arguments:
+            - '@eight_points_guzzle.client.api'

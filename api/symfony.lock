@@ -77,6 +77,15 @@
     "easyrdf/easyrdf": {
         "version": "0.9.1"
     },
+    "eightpoints/guzzle-bundle": {
+        "version": "7.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "7.0",
+            "ref": "e5e657ce5a4ebc99f3c76916938aa0a5f8ef7736"
+        }
+    },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
         "recipe": {
